@@ -2,6 +2,7 @@ import './App.css'
 import { Routes, Route, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import CommentsPage from './pages/CommentsPage';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
 
@@ -12,7 +13,11 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/comments/:pageId" element={<CommentsPage />} />
+
+        <Route element={<PrivateRoute />}>
+          <Route path="/comments/:pageId" element={<CommentsPage />} />
+        </Route>
+
       </Routes>
     </div>
   )

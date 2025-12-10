@@ -9,13 +9,13 @@ function App() {
   return (
     <div className='p-5'>
       <nav className='mb-10'>
-        <Link to="/">Home</Link> | <Link to="/comments/test-page">Comments (test-page)</Link>
+        <Link to="/">Home</Link> | <Link to="/comments">Comments (test-page)</Link>
       </nav>
       <Routes>
         <Route path="/" element={<HomePage />} />
 
         <Route element={<PrivateRoute />}>
-          <Route path="/comments/:pageId" element={<CommentsPage />} />
+          <Route path="/comments" element={<CommentsPage />} />
         </Route>
 
       </Routes>

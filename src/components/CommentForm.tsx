@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function CommentForm({ pageId }: { pageId: string }) {
+export default function CommentForm() {
     const [text, setText] = useState('');
 
     const onSubmit = async (e: React.FormEvent) => {

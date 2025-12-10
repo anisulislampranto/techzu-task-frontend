@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthForm } from "../hooks/useAuthForm";
 import { useAppSelector } from "../hooks/hooks";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+    const navigate = useNavigate(); 
     const { mode, toggleMode, methods, submit, loading, serverError } = useAuthForm("login");
     const { register, formState, watch } = methods;
     const { errors } = formState;
@@ -10,6 +12,12 @@ export default function HomePage() {
 
     const [showPassword, setShowPassword] = useState(false);
     const passwordValue = watch("password");
+
+    useEffect(() => {
+        if (existingToken) {
+            navigate('/comments')
+        }
+    }, [existingToken, navigate])
 
     return (
         <div className="min-h-screen bg-gradient-to-tr from-slate-50 to-white flex items-center justify-center p-6">
@@ -152,21 +160,6 @@ export default function HomePage() {
                         </div>
                     </div>
                 </form>
-
-                <div className="mt-6">
-                    <div className="relative">
-                        <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-slate-100" />
-                        </div>
-                        <div className="relative flex justify-center text-sm">
-                            <span className="px-2 bg-white text-slate-400">or continue with</span>
-                        </div>
-                    </div>
-
-                    <p className="mt-4 text-xs text-slate-400">
-                        By continuing, you agree to our <span className="text-indigo-600">Terms</span> and <span className="text-indigo-600">Privacy Policy</span>.
-                    </p>
-                </div>
 
                 {existingToken && <div className="mt-4 text-sm text-green-600">You are currently logged in.</div>}
             </div>
